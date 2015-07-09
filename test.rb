@@ -7,11 +7,12 @@ class Human
     @name = name
     @money = money
   end
-
+  # Make new instance of TipCalculator
   def build_calculator
     @my_calculator = TipCalculator.new(@name.downcase)
   end
 
+  # Use instance of TipCalculator that was created by the instance of Human calling the method
   def use_calculator
     if @my_calculator
       return @my_calculator.use_calculator
@@ -20,10 +21,13 @@ class Human
     end
   end
 
+  # Check to see if you have money
+  # NOT used in the program at the moment
   def check_wallet
     "I have $#{@money} left."
   end
 
+  # Check if you can afford the bill
   def can_i_afford_the_bill(bill)
     puts "Can I afford the bill?"
     if @money > bill
@@ -34,12 +38,14 @@ class Human
     end
   end
 
+  # Subtract bill amount from Human's total money
   def pay_bill(bill)
     @money -= bill
     puts "My remaining money is $#{@money}."
     return mission_accomplished
   end
 
+  # Bonus Self Affirmation
   def mission_accomplished
     puts "You done it, bro!"
   end
@@ -54,7 +60,7 @@ class TipCalculator
 
   attr_reader :owner
 
-        # Getting input for the calculator
+# Use the instance of TipCalculator
   def use_calculator
     puts "Alright, I have to enter in some information.\nHow much was the bill?"
     bill = gets.chomp.to_f
@@ -66,6 +72,8 @@ class TipCalculator
     my_share = total / num_people
     puts "Your share of the bill is $#{my_share}."
     return @owner.can_i_afford_the_bill(my_share)
+    # This ^^^^^^ is the variable that isn't working how I would like. I would love some advice on how to plug
+    # in the variable to be able to call the method on the instance of Human that created the calculator.
   end
 end
 
